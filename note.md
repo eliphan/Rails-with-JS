@@ -8,14 +8,17 @@ Users has many games through recommendations
 Recommendations has many games
 Recommendations belongs to a user
 
-Games has many recommendations
-Games has many users through recommendations
+Games belongs to a recommendation
+Games belongs to a genre
 
+Genres has many games
+Genres has many recommendations through games
+-----------------------------------------------------------------------
 User can sign up, login, logout, edit their profile, delete their account.
 User can only access their own account page. There will be no index of users.
 User can access their recommendations in the user's profile page.
 User can access their recommendations, access a specific recommendation, edit a recommendation, delete a recommendation.
---------------------------------------------------------
+-------------------------------------------------------------------------
 User can create a new recommendation (new):
 users/:user_id/recommendations/new
   To create a new recommendation, user has to fill out their preferences first.
@@ -25,8 +28,6 @@ User can access the index of the recommendations (index):
 users/:user_id/recommendations
   -> This will list all of the user's recommendations. User can click on each recommendation to get to the show page for that rec.
      Logged in user can access their own recommendations only.
-     Logged in user can't access other's user recommendations. When trying to, user will receive an error.
-     (For example, a user with user_id 5 can't access the recommendations of user_id 1)
      Not logged in user will be redirect to login page.
 
 User can access a specific recommendation (show):
@@ -40,10 +41,10 @@ users/:user_id/recommendations/:recommendation_id/edit
 -> users/:user_id/edit_recommendations
 
 User can delete a specific recommendation(delete)
----------------------------------------------------------
+-------------------------------------------------------------------------
 
 
----------------------------------------------------------
+-------------------------------------------------------------------------
 The attributes of preferences: favorite games that user has played in the past (1-3 games).
 
 The app will return a list of games recommended to them by analyzing their preferences.
