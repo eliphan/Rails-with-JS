@@ -13,19 +13,17 @@
 ActiveRecord::Schema.define(version: 2019_03_01_003519) do
 
   create_table "books", force: :cascade do |t|
-    t.integer "users_id"
-    t.integer "categories_id"
+    t.integer "user_id"
+    t.integer "category_id"
     t.string "title"
     t.string "author"
     t.text "description"
     t.boolean "finished", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["categories_id"], name: "index_books_on_categories_id"
+    t.index ["category_id"], name: "index_books_on_category_id"
     t.index ["title"], name: "index_books_on_title"
-    t.index ["users_id"], name: "index_books_on_users_id"
-    t.index [nil], name: "index_books_on_chapter_id"
-    t.index [nil], name: "index_books_on_user_id"
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -35,12 +33,12 @@ ActiveRecord::Schema.define(version: 2019_03_01_003519) do
   end
 
   create_table "chapters", force: :cascade do |t|
-    t.integer "books_id"
+    t.integer "book_id"
     t.string "chapter_title"
     t.text "chapter_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["books_id"], name: "index_chapters_on_books_id"
+    t.index ["book_id"], name: "index_chapters_on_book_id"
     t.index ["chapter_title"], name: "index_chapters_on_chapter_title"
   end
 

@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
-  before_action :require_login
-  skip_before_action :require_login, only: [:index, :show]
+  before_action :require_logged_in
+  skip_before_action :require_logged_in, only: [:index, :show]
+
   def index
     @books = Book.all
   end
@@ -14,7 +15,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
+    @user = current_user
+    @book = @user.books.build(book_params)
     binding.pry
     if @book.save
     redirect_to book_path(@book)
@@ -41,7 +43,8 @@ class BooksController < ApplicationController
 
   private
     def book_params
-      params.require(:book).permit(:title, :author, :description, :finished, :user_id, :category_id)
+      params.require(:book).permit(
+        :title, :author, :description, :finished, :user_id, :category_id, :category_name)
     end
 
 end
