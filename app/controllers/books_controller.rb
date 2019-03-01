@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :require_login
+  skip_before_action :require_login, only: [:index, :show]
   def index
     @books = Book.all
   end
@@ -13,9 +15,12 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    @book.save
     binding.pry
-    redirect_to @book
+    if @book.save
+    redirect_to book_path(@book)
+    else
+    render :new
+    end
   end
 
   def update
@@ -36,7 +41,7 @@ class BooksController < ApplicationController
 
   private
     def book_params
-      params.require(:book).permit(:title, :author, :description, :finished, :user_id)
+      params.require(:book).permit(:title, :author, :description, :finished, :user_id, :category_id)
     end
 
 end

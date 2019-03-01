@@ -1,2 +1,4 @@
 <h1>Create a Book</h1>
-<%= render partial: "form" %>
+<%= form_for @book do |f| %>
+    <%= render 'form' %>
+<% end %>
