@@ -1,6 +1,7 @@
 User has many books
 --User has many artworks
 User has many categories through books
+User has many reviewers throughs comments
 
 Book belongs to a user
 Book belong to a category
@@ -11,6 +12,11 @@ Category has many books
 Category has many users through books
 
 Chapter belongs to a book
+
+Comments belongs to a book
+Comments belongs to a user
+
+Reviewer has many comments
 
 --Artwork belongs to a user
 --Artwork belongs to a book

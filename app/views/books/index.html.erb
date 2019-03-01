@@ -1,6 +1,6 @@
 <ul>
   <li><% @books.all.each do |book| %>
-      <%= book.title %>
+      <%= link_to book.title, book_path(book) %> by
       <%= book.author %>
     <% end %>
   </li>
