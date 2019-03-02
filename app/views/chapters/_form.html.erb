@@ -1,0 +1,12 @@
+<%= form_for @chapter do |f| %>
+    <%= f.hidden_field :book_id %>
+    <%= f.label :chapter_title %>
+    <%= f.text_area :chapter_title %><br>
+    <%= f.label :chapter_content %>
+    <%= f.text_area :chapter_content %>
+    <br>
+
+    <%= f.submit %>
+  <% end %>
+  
+

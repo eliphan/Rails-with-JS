@@ -1,0 +1,12 @@
+
+<%= @book.title %>
+<p> by <%= @book.author %>
+<p>
+<% if current_user = @book.user %>
+    <%= link_to "Create a new chapter", new_book_chapter_path(@book) %>
+<% end %>
+<p><br>
+<%= @book.description %>
+<% @book.chapters.each do |chapter| %>
+    <%= link_to chapter.chapter_title, book_chapter_path(chapter) %>
+    <% end %>
