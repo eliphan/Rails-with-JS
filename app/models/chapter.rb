@@ -1,6 +1,5 @@
 class Chapter < ApplicationRecord
   belongs_to :book
-
   # def user_id=(id)
   #   self.user = User.find_or_create_by(id: id)
   # end

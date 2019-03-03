@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :books do
     resources :chapters, only: [:index, :show, :new, :create, :edit]
   end
-
   resources :chapters
   
   get '/auth/facebook/callback' => 'sessions#create'

@@ -6,7 +6,7 @@ class ChaptersController < ApplicationController
     if params[:book_id] && !Book.exists?(params[:book_id])
         redirect_to books_path
     else
-        @book = Book.find_by_id(params[:book_id])
+        @book = Book.find_by_id(book_id: params[:book_id])
         @chapters = @book.chapters
     end
   end
@@ -16,27 +16,25 @@ class ChaptersController < ApplicationController
   end
 
   def new
-    if params[:book_id] && !Book.exists?(params[:book_id])
-        redirect_to books_path
-    else
+ 
        @chapter = Chapter.new(book_id: params[:book_id])
-    end
+  
   end
 
   def create
-     @chapter = Chapter.new(chapter_params)
-        if @chapter.save
-            redirect_to @chapter
-        else
-            render :new
-        end
-     
+    @chapter = Chapter.new(chapter_params)
+
+      if @chapter.save
+          redirect_to chapter_path(@chapter)
+      else
+          render :new
+      end
   end
 
   def update
     @chapter = Chapter.find(params[:id])
     @chapter.update(chapter_params)
-    redirect_to chapter_path(@chapter)
+    redirect_to book_chapter_path(@book,@chapter)
   end
 
   def edit
@@ -52,7 +50,7 @@ class ChaptersController < ApplicationController
   private
     def chapter_params
       params.require(:chapter).permit(
-        :chapter_title, :chapter_content, :user_id, :book_id)
+        :chapter_title, :chapter_content, :book_id)
     end
 
 end
