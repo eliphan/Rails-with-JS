@@ -1,9 +1,8 @@
 class BooksController < ApplicationController
-  before_action :require_logged_in
-  skip_before_action :require_logged_in, only: [:index, :show]
+  before_action :require_logged_in, except: [:show, :index]
+  before_action :set_user
 
   def index
-    binding.pry
     @books = Book.all
   end
 
@@ -18,7 +17,6 @@ class BooksController < ApplicationController
   def create
     @user = current_user
     @book = @user.books.build(book_params)
-    binding.pry
     if @book.save
     redirect_to book_path(@book)
     else

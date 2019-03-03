@@ -1,4 +1,4 @@
 Hello, <%= @user.username %>
-<p>
-<%= link_to "Your books", books_path %>
+<p>You have created <%= pluralize (@user.num_of_books), 'book' %>.</p>
+<%= link_to "Your books", user_books_path(@user) %>
 <%= link_to "Create a book", new_book_path %>

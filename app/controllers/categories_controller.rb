@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+  before_action :require_logged_in, except: [:show, :index]
+  before_action :set_user
+
   def index
     @categorys = Category.all
   end

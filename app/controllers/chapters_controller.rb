@@ -1,7 +1,7 @@
 class ChaptersController < ApplicationController
-    before_action :require_logged_in
-    skip_before_action :require_logged_in, only: [:index, :show]
-  
+  before_action :require_logged_in, except: [:show, :index]
+  before_action :set_user
+
   def index
     if params[:book_id] && !Book.exists?(params[:book_id])
         redirect_to books_path
