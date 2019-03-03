@@ -29,7 +29,7 @@ User can create new chapter in a book. User can edit/delete a chapter of a book.
 ----------------------------------------------------------------------------------------
 Bonus features:
 User can choose when create their account: Author, Artist, Reader.
-Each type of author has their own unique functions and layout.
+Each type of user has their own unique functions and layout.
 ----------------------------------------------------------------------------------------
 Bonus-bonus features:
 User need to buy chapters of a book to read

@@ -3,12 +3,9 @@ class ChaptersController < ApplicationController
   before_action :set_user
 
   def index
-    if params[:book_id] && !Book.exists?(params[:book_id])
-        redirect_to books_path
-    else
-        @book = Book.find_by_id(book_id: params[:book_id])
-        @chapters = @book.chapters
-    end
+      @book = Book.find_by(id: params[:book_id])
+      @chapters = @book.chapters
+ 
   end
 
   def show
@@ -16,9 +13,11 @@ class ChaptersController < ApplicationController
   end
 
   def new
- 
+    if params[:book_id] && !Book.exists?(params[:book_id])
+      redirect_to books_path
+    else
        @chapter = Chapter.new(book_id: params[:book_id])
-  
+    end
   end
 
   def create
@@ -34,7 +33,7 @@ class ChaptersController < ApplicationController
   def update
     @chapter = Chapter.find(params[:id])
     @chapter.update(chapter_params)
-    redirect_to book_chapter_path(@book,@chapter)
+    redirect_to chapter_path(@chapter)
   end
 
   def edit

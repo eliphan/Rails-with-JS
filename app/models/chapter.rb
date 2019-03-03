@@ -1,5 +1,6 @@
 class Chapter < ApplicationRecord
   belongs_to :book
+  has_many :comments
   # def user_id=(id)
   #   self.user = User.find_or_create_by(id: id)
   # end
@@ -15,4 +16,17 @@ class Chapter < ApplicationRecord
   def book_id
     self.book ? self.book.id : nil
   end
+
+  def comment_contents=(comments)
+    comments.each do |content|
+      if content.strip != ''
+        self.comments.build(content: content)
+      end
+    end
+  end
+  
+  def comment_contents
+    self.comments.map(&:content)
+  end
+  
 end

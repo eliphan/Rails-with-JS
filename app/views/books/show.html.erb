@@ -11,4 +11,5 @@
 <ol><% @book.chapters.each do |chapter| %>
     <li><%= link_to chapter.chapter_title, book_chapter_path(@book,chapter) %></li>
 <% end %>
+ 
 </ol>
