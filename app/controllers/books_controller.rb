@@ -3,6 +3,7 @@ class BooksController < ApplicationController
   skip_before_action :require_logged_in, only: [:index, :show]
 
   def index
+    binding.pry
     @books = Book.all
   end
 

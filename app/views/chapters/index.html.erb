@@ -1,6 +1,6 @@
 <ul>
     <% @book.chapters.each do |chapter| %>
     <li><%= chapter.chapter_title %></li>
-    <li><%= chapter.chapter_content%></li>
+    <%= chapter.chapter_content%></li>
     <% end %>
 </ul>
