@@ -1,24 +1,9 @@
-# README
+Booksher
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Booksher is an app that allows its users to self-publish their books. 
 
-Things you may want to cover:
+After signing up with either emails or logging in their facebook accounts, users can start create their books in their account page.
+Only logged in users can create new books and new chapters for their books. Users can only edit their own books and chapters.
+Guests can read all books and chapters.
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
