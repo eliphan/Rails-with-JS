@@ -3,18 +3,16 @@ class ChaptersController < ApplicationController
     skip_before_action :require_logged_in, only: [:index, :show]
   
   def index
-    if params[:book_id]
+    if params[:book_id] && !Book.exists?(params[:book_id])
+        redirect_to books_path
+    else
         @book = Book.find_by_id(params[:book_id])
-        if @book.nil?
-            redirect_to books_path 
-        else
-            @chapters = @book.chapters
-        end
+        @chapters = @book.chapters
     end
   end
 
   def show
-
+    @chapter = Chapter.find(params[:id])
   end
 
   def new
@@ -26,12 +24,13 @@ class ChaptersController < ApplicationController
   end
 
   def create
-    @chapter = Chapter.new(chapter_params)
-    if @chapter.save
-        redirect_to @chapter
-    else
-        render :new
-    end
+     @chapter = Chapter.new(chapter_params)
+        if @chapter.save
+            redirect_to @chapter
+        else
+            render :new
+        end
+     
   end
 
   def update
@@ -54,10 +53,6 @@ class ChaptersController < ApplicationController
     def chapter_params
       params.require(:chapter).permit(
         :chapter_title, :chapter_content, :user_id, :book_id)
-    end
-
-    def book_chapter
-        @book = Book.find_by_id(params[:id])
     end
 
 end
