@@ -1,13 +1,14 @@
 
 <%= @book.title %>
-<p> by <%= @book.author %>
-<p>
-<% if current_user = @book.user %>
-    <%= link_to "Create a new chapter", new_book_chapter_path(@book) %>
-<% end %>
-<p><br>
+<p> by <%= @book.author %></p>
+<%= display_edit(@book) %>
+<%= display_create_chapter(@book) %>
+<br><br>
 <%= @book.description %>
-<%= link_to "All Chapters", book_chapters_path(@book) %>
-<% @book.chapters.each do |chapter| %>
-    <%= link_to chapter.chapter_title, chapter_path(chapter) %>
-    <% end %>
+<br><br>
+<%= link_to "Read all chapters", book_chapters_path(@book) %>
+
+<ol><% @book.chapters.each do |chapter| %>
+    <li><%= link_to chapter.chapter_title, book_chapter_path(@book,chapter) %></li>
+<% end %>
+</ol>
