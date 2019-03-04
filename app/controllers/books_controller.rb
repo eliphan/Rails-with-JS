@@ -9,6 +9,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @chapters = @book.chapters
+    @review= @book.reviews.build
   end
 
   def new
@@ -49,7 +50,8 @@ class BooksController < ApplicationController
         :finished, 
         :user_id, 
         :category_id, 
-        category_attributes:[:name]
+        category_attributes:[:name],
+        review_contents:[]
         )
     end
 

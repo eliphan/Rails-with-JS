@@ -2,7 +2,7 @@ class Book < ApplicationRecord
   belongs_to :user
   belongs_to :category
   has_many :chapters
-  has_many :comments
+  has_many :reviews
 
   # def user_id=(id)
   #   self.user = User.find_or_create_by(id: id)
@@ -18,16 +18,16 @@ class Book < ApplicationRecord
     end 
   end
 
-  def comments_contents=(comments)
-    comments.each do |content|
+  def review_contents=(reviews)
+    reviews.each do |content|
       if content.strip != ''
-        self.comments.build(content: content)
+        self.reviews.build(content: content)
       end
     end
   end
   
-  def comments_contents
-    self.comments.map(&:content)
+  def review_contents
+    self.reviews.map(:content)
   end
 
 end
