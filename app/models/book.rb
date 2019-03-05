@@ -30,4 +30,11 @@ class Book < ApplicationRecord
     self.reviews.map(:content)
   end
 
+  def finished?
+    self.finished == true
+  end
+
+  def not_finished?
+    self.finished == false
+  end
 end

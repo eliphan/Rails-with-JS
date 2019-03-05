@@ -43,7 +43,7 @@ class ChaptersController < ApplicationController
   def destroy
     @chapter = Chapter.find(params[:id])
     @chapter.destroy
-    redirect_to book_chapters_path
+    redirect_to book_path(@chapter.book)
   end
 
   private

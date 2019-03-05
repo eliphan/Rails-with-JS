@@ -1,24 +1,46 @@
 
 <%= @book.title %>
 <p> by <%= @book.author %></p>
+<%= display_complete_check(@book) %>
+
+<%= form_for @book do |f| %>
+    <% if !@book.finished && @book.user == current_user %>
+        <%= f.label "Mark this book as finished" %>
+        <%= f.check_box :finished %>
+        <% end %>
+    <% end %>
+
+<br>
 <%= display_edit(@book) %>
 <%= display_create_chapter(@book) %>
-<br><br>
-<%= @book.description %>
-<br><br>
+
+<p><%= @book.description %></p>
+
 <%= link_to "Read all chapters", book_chapters_path(@book) %>
 
 <ol><% @book.chapters.each do |chapter| %>
-    <li><%= link_to chapter.chapter_title, book_chapter_path(@book,chapter) %></li>
+    <li>
+    <%= link_to chapter.chapter_title, book_chapter_path(@book,chapter) %>
+    <%= form_for(chapter, method:"delete")do |f| %>
+    <%= f.submit "Delete" %>
+    <% end %>
+    </li>
 <% end %>
 </ol>
 
 Reviews:
 <ul>
   <% @book.reviews.each do |review| %>
-    <li><%= review.user_username %></li>
-    <li><%= review.content %></li>
+    <li>
+        <%= review.user_username %> said:
+        <%= review.content %>
+        <%= review.created_at %>
+        <%= form_for(review, method:"delete")do |f| %>
+        <%= f.submit "Delete" %>
+        <% end %>
+    </li>
   <% end %>
+  
   </ul>
   <p>
 

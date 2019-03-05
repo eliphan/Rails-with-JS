@@ -3,9 +3,20 @@ class ReviewsController < ApplicationController
 
     def create
         @review = Review.create(review_params)
-        binding.pry
         @review.save
         redirect_to @review.book
+    end
+
+    def update
+        @review = Review.find(params[:id])
+        @review.update(review_params)
+        redirect_to book_review_path(@review.book, @review)
+    end
+
+    def destroy
+        @review = Review.find(params[:id])
+        @review.destroy
+        redirect_to book_path(@review.book)
     end
 
     private

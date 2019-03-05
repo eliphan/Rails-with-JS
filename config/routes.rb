@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :admins
   devise_for :users, :path => 'accounts', :controllers => { registrations: 'registrations' }
   resources :users do
     resources :books, only: [:index, :show, :new, :create, :edit]
@@ -8,11 +9,15 @@ Rails.application.routes.draw do
   resources :categories
   resources :reviews  
   
+  resources :books do 
+    resources :reviews
+  end
+   
   resources :books do
     resources :chapters, only: [:index, :show, :new, :create, :edit]
   end
   resources :chapters
-  resources :comments
+
   get '/auth/facebook/callback' => 'sessions#create'
 
   root 'static_pages#home'
