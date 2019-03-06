@@ -1,11 +1,30 @@
 <ul>    
     <% @users.each do |user| %>
-    <li><%= user.username %><br>
-    <%= user.email %> 
+    <li>
+        <%= user.username %><br>
+        <%= user.email %>
+        <%= form_for(user, method:"delete")do |f| %>
+        <%= f.submit "Delete User" %>
+        <% end %> 
     <% end %>
     </li>
+
     <% @books.each do |book| %>
-        <li><%= book.title %>
-        </li>
+    <li>
+        <%= book.title %>
+        <%= form_for(book, method:"delete")do |f| %>
+        <%= f.submit "Delete Book" %>
+        <% end %> 
+    </li>
+    <% end %>
+
+    <% @chapters.each do |chapter| %>
+    <li>
+        <%= chapter.book.title if chapter.book %>:
+        <%= chapter.chapter_title %>
+        <%= form_for(chapter, method:"delete")do |f| %>
+        <%= f.submit "Delete Chapter" %>
         <% end %>
+    </li> 
+    <% end %>
 </ul>

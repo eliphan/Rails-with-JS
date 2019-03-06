@@ -34,7 +34,7 @@ Reviews:
         <%= review.content %><br>
         <%= review.created_at %>
         
-        <% if review.user == current_user %>
+        <% if review.user == current_user || @user.admin %>
             <%= form_for(review)do |f| %>
             <%= f.submit "Edit" %>
             <% end %>
@@ -42,7 +42,7 @@ Reviews:
             <%= form_for(review, method:"delete")do |f| %>
             <%= f.submit "Delete" %>
             <% end %>
-            <% end %>
+        <% end %>
     </li>
     <% end %>
   </ul>

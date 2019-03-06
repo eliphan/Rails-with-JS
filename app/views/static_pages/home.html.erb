@@ -2,6 +2,8 @@
   <% @user = current_user %>
   <p>Hello, <%= current_user.username %></p>
   <%= link_to "My Account", user_path(@user) %>
+  <p>
+  <%= link_to "Read All Books", books_path %>
 <% else %>
   <%= link_to('Log in with Facebook', '/auth/facebook') %>
   <p>

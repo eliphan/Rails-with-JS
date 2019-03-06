@@ -6,10 +6,11 @@ class AdminsController < ApplicationController
             if @user.admin 
                 render :home 
             else
-                redirect_to 'static_pages/home'
+                flash[:alert] = "You're not authorized as an admin"
+                redirect_to root_path
             end
         else
-            flash[:alert] = "Welcome Back"
+            flash[:alert] = "Please log in first"
             redirect_to new_user_session_path
         end
     end
@@ -17,5 +18,6 @@ class AdminsController < ApplicationController
     def index
         @users = User.all
         @books = Book.all
+        @chapters = Chapter.all
     end
 end

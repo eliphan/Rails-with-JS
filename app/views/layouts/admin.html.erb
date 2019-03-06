@@ -5,17 +5,14 @@
 
 </head>
 <body>
-
+<%= render 'layouts/nav' %>
 <h1>Admin</h1>
-<div class="container">
-  <% flash.each do |key, value| %>
-    <div class="<%= flash_class(key) %>">
-      <%= value %>
-    </div>
-  <% end %>
 
-  <%= yield %>
-</div>
+<% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+          <%= value %>
+    </div>
+<% end %>
 
 <%= yield %>
 
