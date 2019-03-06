@@ -17,7 +17,7 @@ module BooksHelper
     end
 
     def form_for_book_status(book)
-        if !book.finished && book.user = current_user
+        if !book.finished && book.user == current_user
             form_for(book) do |f|
                 
                 f.check_box :finished, class: "toggle"

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  
-  resources :admins
+  namespace :admin do
+    resources :users, only: [:index]
+  end
+
+  get 'admins', to: 'admins#home'
+  get 'admins/index', to: 'admins#index'
+
   devise_for :users, :path => 'accounts', :controllers => { registrations: 'registrations' }
+  
   resources :users do
     resources :books, only: [:index, :show, :new, :create, :edit]
     end
@@ -12,7 +18,7 @@ Rails.application.routes.draw do
   resources :books do 
     resources :reviews
   end
-   
+
   resources :books do
     resources :chapters, only: [:index, :show, :new, :create, :edit]
   end
