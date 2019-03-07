@@ -1,7 +1,3 @@
-<% flash.each do |key, value| %>
-    <div class="<%= flash_class(key) %>">
-          <%= value %>
-    </div>
-<% end %>
+
 <h3>Welcome admin <%= current_user.username %> </h3>
 <%= link_to "All users and books", admins_index_path %>
