@@ -50,7 +50,7 @@ Reviews:
 <br>
 <%= form_for @review do |f| %>
     <%= f.hidden_field :book_id %>
-    <%= f.hidden_field :user_id, :value => current_user.id if current_user.try(:user) %>
+    <%= f.hidden_field :user_id, :value => @user.id if @user %>
     <%= f.label 'Name:' %>
     <%= f.text_field :user_username %>
     <%= f.label 'Review:' %>

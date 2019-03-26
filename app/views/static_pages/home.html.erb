@@ -6,7 +6,7 @@
   <p>
   <%= link_to "Read All Books", books_path %>
 <% else %>
-  <%= link_to('Log in with Facebook', '/auth/facebook') %>
+  <%= link_to('Log in with Facebook', user_facebook_omniauth_authorize_path) %>
   <p>
   <%= link_to "Read All Books", books_path %>
 <% end %>

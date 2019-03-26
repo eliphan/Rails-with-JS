@@ -34,3 +34,5 @@
 /config/application.yml
 
 /.env
+
+/config/credentials.yml.enc
