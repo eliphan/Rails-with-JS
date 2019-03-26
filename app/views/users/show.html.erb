@@ -1,4 +1,13 @@
 Hello, <%= @user.username %>
 <p>You have created <%= pluralize (@user.num_of_books), 'book' %>.</p>
-<%= link_to "Your books", user_books_path(@user) %>
+
+<ol><% @user.books.each do |book| %>
+    <li>
+    <%= link_to book.title, user_book_path(@user, book) %>
+    </li>
+    <% end %>
+
+</ol>
+
+
 <%= link_to "Create a book", new_book_path %>
