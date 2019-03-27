@@ -30,7 +30,7 @@ Reviews:
 <ul>
     <% @book.reviews.each do |review| %>
     <li>
-        <%= review.user_username %> said:
+        <%= review.user.try(:username) || review.user.try(:email) %> said:
         <%= review.content %><br>
         <%= review.created_at %>
         
@@ -47,15 +47,13 @@ Reviews:
     <% end %>
   </ul>
 
-<br>
-<%= form_for @review do |f| %>
-    <%= f.hidden_field :book_id %>
-    <%= f.hidden_field :user_id, :value => @user.id if @user %>
-    <%= f.label 'Name:' %>
-    <%= f.text_field :user_username %>
-    <%= f.label 'Review:' %>
-    <%= f.text_area :content %>
+<br>  
+    <%= form_for @review do |f| %>
+        <%= f.hidden_field :book_id %>
+        <%= f.hidden_field :user_id, :value => @user.id if @user %>
 
-    <%= f.submit %>
-<% end %>  
+        <%= f.label :content %>
+        <%= f.text_area :content %> 
+        <%= f.submit %>
+    <% end %>  
 

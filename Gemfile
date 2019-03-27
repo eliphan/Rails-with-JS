@@ -32,7 +32,8 @@ gem 'omniauth-facebook'
 gem 'pry'
 gem 'spring'
 gem 'bootstrap'
-
+gem 'thin'
+gem 'dotenv-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

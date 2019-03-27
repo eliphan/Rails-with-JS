@@ -1,4 +1,4 @@
-Hello, <%= @user.username %>
+Hello, <%= @user.username || @user.email %>
 <p>You have created <%= pluralize (@user.num_of_books), 'book' %>.</p>
 
 <ol><% @user.books.each do |book| %>

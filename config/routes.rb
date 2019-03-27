@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'admins', to: 'admins#home'
   get 'admins/index', to: 'admins#index'
 
-  devise_for :users, :path => 'accounts', :controllers => { registrations: 'registrations' }
+  devise_for :users, :path => 'accounts', :controllers => { registrations: 'registrations' ,  omniauth_callbacks: 'omniauth_callbacks'}
   
   resources :users do
     resources :books, only: [:index, :show, :new, :create, :edit]

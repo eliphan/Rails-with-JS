@@ -20,4 +20,10 @@ class Review < ApplicationRecord
       self.user = user
     end
     
+    def user_attributes=(user_attributes)
+      if !user_attributes[:username].blank? 
+        self.user = User.find_or_create_by(user_attributes)
+      end 
+    end
+
 end
