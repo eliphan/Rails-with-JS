@@ -34,7 +34,7 @@ Reviews:
         <%= review.content %><br>
         <%= review.created_at %>
         
-        <% if review.user == current_user || @user.admin %>
+        <% if review.user == current_user || @user.try(:admin) %>
             <%= form_for(review)do |f| %>
             <%= f.submit "Edit" %>
             <% end %>
