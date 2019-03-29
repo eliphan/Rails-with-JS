@@ -3,7 +3,11 @@ class BooksController < ApplicationController
   before_action :set_user
 
   def index
-    @books = Book.all
+    if params[:user_id]
+      @books = User.find(params[:user_id]).books 
+    else
+      @books = Book.all
+    end
   end
 
   def show
@@ -19,9 +23,9 @@ class BooksController < ApplicationController
   def create
     @book = @user.books.build(book_params)
     if @book.save
-    redirect_to book_path(@book)
+      redirect_to book_path(@book)
     else
-    render :new
+      render :new
     end
   end
 

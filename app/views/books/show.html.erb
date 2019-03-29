@@ -3,15 +3,16 @@
 <p> by <%= @book.author %></p>
 <%= display_complete_check(@book) %>
 
-<%= form_for @book do |f| %>
-    <% if !@book.finished && @book.user == current_user %>
-        <%= f.label "Mark this book as finished" %>
-        <%= f.check_box :finished %>
-        <% end %>
+<% if !@book.finished && @book.user == current_user %>
+    <%= form_for @book do |f| %> 
+        <%= f.hidden_field :finished, :value => :finished %>
+        <%= f.submit "Mark as finished" %>
     <% end %>
+<% end %>
 
 <br>
 <%= display_edit(@book) %>
+</br>
 <%= display_create_chapter(@book) %>
 
 <p><%= @book.description %></p>
@@ -47,7 +48,8 @@ Reviews:
     <% end %>
   </ul>
 
-<br>  
+<br> 
+    <% if current_user %>
     <%= form_for @review do |f| %>
         <%= f.hidden_field :book_id %>
         <%= f.hidden_field :user_id, :value => @user.id if @user %>
@@ -56,4 +58,4 @@ Reviews:
         <%= f.text_area :content %> 
         <%= f.submit %>
     <% end %>  
-
+   <% end %>     
