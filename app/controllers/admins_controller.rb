@@ -19,5 +19,6 @@ class AdminsController < ApplicationController
         @users = User.all
         @books = Book.all
         @chapters = Chapter.all
+        @reviews = Review.all
     end
 end

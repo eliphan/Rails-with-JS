@@ -1,4 +1,4 @@
-<h1>Create a Chapter</h1>
+<h1>Create a Chapter for <%= @book.title if @book %></h1>
 
 <%= form_for @chapter do |f| %>
     <%= render 'form' %>

@@ -1,16 +1,27 @@
+<% if @book.errors.any? %>
+  <div id="error_explanation">
+    <h3>There were some errors:</h3>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @book do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %><br>
   <%= f.label :author %>
-  <%= f.text_field :author %>
+  <%= f.text_field :author %><br>
   <%= f.label :description %>
-  <%= f.text_area :description %>
-  <%= f.label :category %>
-  <%= f.collection_select :category_id, Category.all, :id, :name %>
+  <%= f.text_area :description %><br>
+  <%= f.label :genre %>
+  <%= f.collection_select :category_id, Category.all, :id, :name %> or create your own genre:
   <%= f.fields_for :category, @book.build_category do |categories_fields| %>
     <%= categories_fields.text_field :name %>
     <% end %>
-  <%= f.label :finished %>
+  <%= f.label :finished %>?
   <%= f.check_box :finished %>
 
   <br>

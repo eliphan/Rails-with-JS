@@ -1,6 +1,9 @@
 class Chapter < ApplicationRecord
   belongs_to :book
   has_many :comments
+  validates :chapter_title, presence: true, length: {minimum: 1}
+  validates :chapter_content, presence: true, length: {minimum: 5}
+  
   # def user_id=(id)
   #   self.user = User.find_or_create_by(id: id)
   # end

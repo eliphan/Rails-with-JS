@@ -50,12 +50,12 @@ Reviews:
 
 <br> 
     <% if current_user %>
-    <%= form_for @review do |f| %>
-        <%= f.hidden_field :book_id %>
-        <%= f.hidden_field :user_id, :value => @user.id if @user %>
-
-        <%= f.label :content %>
-        <%= f.text_area :content %> 
-        <%= f.submit %>
-    <% end %>  
-   <% end %>     
+        Comment as <%= current_user.username || current_user.email %>:
+        <%= form_for @review do |f| %>
+            <%= f.hidden_field :book_id %>
+            <%= f.hidden_field :user_id, :value => @user.id if @user %>
+            <%= f.label :comment %>
+            <%= f.text_area :content %> 
+            <%= f.submit %>
+        <% end %>  
+    <% end %>     

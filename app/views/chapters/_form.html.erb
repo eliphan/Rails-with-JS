@@ -1,3 +1,14 @@
+<% if @chapter.errors.any? %>
+  <div id="error_explanation">
+    <h3>There were some errors:</h3>
+    <ul>
+      <% @chapter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @chapter do |f| %>
     <%= f.hidden_field :book_id %>
     <%= f.label :chapter_title %>

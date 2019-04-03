@@ -6,8 +6,10 @@ Hello, <%= @user.username || @user.email %>
     <%= link_to book.title, user_book_path(@user, book) %>
     </li>
     <% end %>
-
 </ol>
 
+<ol><%= @user.books_reviews.count %>
+
+</ol>
 
 <%= link_to "Create a book", new_book_path %>

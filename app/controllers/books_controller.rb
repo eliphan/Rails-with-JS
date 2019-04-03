@@ -22,6 +22,7 @@ class BooksController < ApplicationController
 
   def create
     @book = @user.books.build(book_params)
+    
     if @book.save
       redirect_to book_path(@book)
     else
@@ -29,20 +30,33 @@ class BooksController < ApplicationController
     end
   end
 
-  def edit
+  def edit  
     @book = Book.find(params[:id])
   end
 
   def update
     @book = Book.find(params[:id])
-    @book.update(book_params)
-    redirect_to book_path(@book)
+
+    if @book.user = @user
+      if @book.save
+        @book.update(book_params)
+        redirect_to book_path(@book)
+      else
+        render :update 
+      end
+    else
+        flash[:message] = "You can't edit this book."
+    end
   end
 
   def destroy
     @book = Book.find(params[:id])
-    @book.destroy
-    redirect_to books_path
+    if @book.user = @user
+      @book.destroy
+      redirect_to books_path
+    else
+      flash[:message] = "You can't delete this book."
+    end
   end
 
   private

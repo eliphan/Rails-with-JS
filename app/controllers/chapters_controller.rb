@@ -5,7 +5,6 @@ class ChaptersController < ApplicationController
   def index
       @book = Book.find_by(id: params[:book_id])
       @chapters = @book.chapters
- 
   end
 
   def show
@@ -13,6 +12,7 @@ class ChaptersController < ApplicationController
   end
 
   def new
+    @book = Book.find_by(id: params[:book_id])
     if params[:book_id] && !Book.exists?(params[:book_id])
       redirect_to books_path
     else
@@ -22,7 +22,7 @@ class ChaptersController < ApplicationController
 
   def create
     @chapter = Chapter.new(chapter_params)
-
+    @book = Book.find_by(id: params[:book_id])
       if @chapter.save
           redirect_to chapter_path(@chapter)
       else
@@ -32,8 +32,12 @@ class ChaptersController < ApplicationController
 
   def update
     @chapter = Chapter.find(params[:id])
-    @chapter.update(chapter_params)
-    redirect_to chapter_path(@chapter)
+    if @chapter.user = current_user
+      @chapter.update(chapter_params)
+      redirect_to chapter_path(@chapter)
+    else
+      flash[:message] = "You can't edit this chapter."
+    end
   end
 
   def edit
@@ -42,8 +46,12 @@ class ChaptersController < ApplicationController
 
   def destroy
     @chapter = Chapter.find(params[:id])
-    @chapter.destroy
-    redirect_to book_path(@chapter.book)
+    if @chapter.user = current_user
+      @chapter.destroy
+      redirect_to book_path(@chapter.book)
+    else
+      flash[:message] = "You can't edit this chapter."
+    end
   end
 
   private

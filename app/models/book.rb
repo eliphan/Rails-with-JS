@@ -4,6 +4,10 @@ class Book < ApplicationRecord
   has_many :chapters
   has_many :reviews
 
+
+  validates :title, presence: true, length: {minimum: 1}
+  validates :author, presence: true
+  validates :description, presence: true, length: {minimum: 5}
   # def user_id=(id)
   #   self.user = User.find_or_create_by(id: id)
   # end
