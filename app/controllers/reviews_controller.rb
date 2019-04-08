@@ -1,5 +1,14 @@
 class ReviewsController < ApplicationController
     before_action :set_user
+    before_action :set_book
+
+    def index 
+        @reviews = @book.reviews || @reviews = Review.all
+        respond_to do |format|
+            format.html { render :index }
+            format.json { render json: @reviews }
+        end
+    end
 
     def create
         @review = Review.create(review_params)
@@ -9,6 +18,7 @@ class ReviewsController < ApplicationController
 
     def update
         @review = Review.find(params[:id])
+
         @review.update(review_params)
         redirect_to book_review_path(@review.book, @review)
     end
@@ -29,4 +39,7 @@ class ReviewsController < ApplicationController
                 )
         end
 
+        def set_book
+            @book = Book.find_by(id: params[:book_id])
+        end
 end 

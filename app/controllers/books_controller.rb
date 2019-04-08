@@ -5,8 +5,16 @@ class BooksController < ApplicationController
   def index
     if params[:user_id]
       @books = User.find(params[:user_id]).books 
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: @books }
+      end
     else
       @books = Book.all
+      respond_to do |format|
+        format.html { render :index}
+        format.json { render json: @books }
+      end
     end
   end
 
@@ -14,6 +22,10 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @chapters = @book.chapters
     @review= @book.reviews.build
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @book }
+    end
   end
 
   def new
@@ -42,7 +54,8 @@ class BooksController < ApplicationController
         @book.update(book_params)
         redirect_to book_path(@book)
       else
-        render :update 
+        flash[:message] = "There was an error updating this book."
+        redirect_to book_path(@book)
       end
     else
         flash[:message] = "You can't edit this book."
@@ -66,7 +79,7 @@ class BooksController < ApplicationController
         :author, 
         :description, 
         :finished, 
-        :user_id, 
+        :user_id,
         :category_id, 
         category_attributes:[:name],
         review_contents:[]

@@ -1,0 +1,6 @@
+<ul>
+    <% @reviews.each do |review| %>
+    <li><%= review.user.username || review.user.email %> said: 
+    <%= review.content%></li>
+    <% end %>
+</ul>

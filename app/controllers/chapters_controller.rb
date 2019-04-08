@@ -1,18 +1,22 @@
 class ChaptersController < ApplicationController
   before_action :require_logged_in, except: [:show, :index]
   before_action :set_user
+  before_action :set_book
 
   def index
-      @book = Book.find_by(id: params[:book_id])
       @chapters = @book.chapters
   end
 
   def show
     @chapter = Chapter.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @chapter } #@book @chapter -> book_id/chapters/chapter_id
+    end
   end
 
   def new
-    @book = Book.find_by(id: params[:book_id])
+   
     if params[:book_id] && !Book.exists?(params[:book_id])
       redirect_to books_path
     else
@@ -58,6 +62,10 @@ class ChaptersController < ApplicationController
     def chapter_params
       params.require(:chapter).permit(
         :chapter_title, :chapter_content, :book_id)
+    end
+
+    def set_book
+      @book = Book.find_by(id: params[:book_id])
     end
 
 end

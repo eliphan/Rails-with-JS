@@ -8,8 +8,4 @@ Hello, <%= @user.username || @user.email %>
     <% end %>
 </ol>
 
-<ol><%= @user.books_reviews.count %>
-
-</ol>
-
 <%= link_to "Create a book", new_book_path %>

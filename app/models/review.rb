@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
     belongs_to :user
     belongs_to :book 
- 
+   
 
     def user_id
       self.try(:user).try(:id)

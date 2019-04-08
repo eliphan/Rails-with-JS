@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :categories, through: :books
   has_many :reviews
   has_many :books
+  has_many :categories, through: :books
 
   
     def self.from_omniauth(auth)

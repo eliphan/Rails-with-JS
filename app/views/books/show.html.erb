@@ -27,6 +27,10 @@
 
 </ol>
 
+<div id="load-reviews">
+<%= link_to "Load Reviews", book_reviews_path(@book), class:"load_reviews" %>
+</div>
+
 Reviews:
 <ul>
     <% @book.reviews.each do |review| %>
@@ -36,10 +40,7 @@ Reviews:
         <%= review.created_at %>
         
         <% if review.user == current_user || @user.try(:admin) %>
-            <%= form_for(review)do |f| %>
-            <%= f.submit "Edit" %>
-            <% end %>
-
+          
             <%= form_for(review, method:"delete")do |f| %>
             <%= f.submit "Delete" %>
             <% end %>
@@ -59,3 +60,25 @@ Reviews:
             <%= f.submit %>
         <% end %>  
     <% end %>     
+
+<div class="bookTitle"><%= @book.title %></div>
+<%= @book.author %>
+<a href="#" class="js-next" data-id="<%=@book.id%>">Next...</a>
+<p class="bookBody"><%= @book.description %></p>
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  $(".js-next").on("click", function(event) {
+    event.preventDefault()
+    let nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    $.getJSON("/books/" + nextId + ".json", function(data) {
+      $(".authorName").text(data["author"]);
+      $(".bookTitle").text(data["title"]);
+      $(".bookBody").text(data["description"]);
+    
+      $(".js-next").attr("data-id", data["id"]);
+    });
+  });
+});
+</script>
+
