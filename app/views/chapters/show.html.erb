@@ -2,6 +2,7 @@
 <p>
 <div class="chapterTitle"><%= @chapter.chapter_title %></div>
 <p class="chapterBody"><%= @chapter.chapter_content %></p>
+
 <a href="#" class="js-next" data-id="<%=@chapter.id%>">Next...</a>
 
 <script type="text/javascript" charset="utf-8">
@@ -9,7 +10,7 @@ $(function () {
   $(".js-next").on("click", function(event) {
     event.preventDefault()
     let nextId = parseInt($(".js-next").attr("data-id")) + 1;
-    $.getJSON("/chapters/" + nextId + ".json", function(data) {
+    $.getJSON(nextId + ".json", function(data) {
 
       $(".chapterTitle").text(data["chapter_title"]);
       $(".chapterBody").text(data["chapter_content"]);
