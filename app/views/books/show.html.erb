@@ -27,8 +27,13 @@
 
 </ol>
 
-<div id="load-reviews">
-<%= link_to "Load Reviews", book_reviews_path(@book), class:"load_reviews" %>
+
+<%= link_to "Load Reviews", book_reviews_path(@book), class:"load_reviews", remote: true %>
+
+
+<div class="reviews">
+    <ul>
+    </ul>
 </div>
 
 Reviews:

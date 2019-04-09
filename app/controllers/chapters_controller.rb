@@ -11,7 +11,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.find(params[:id])
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @chapter } #@book @chapter -> book_id/chapters/chapter_id
+      format.json { render json: @chapter } 
     end
   end
 

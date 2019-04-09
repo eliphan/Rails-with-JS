@@ -4,19 +4,19 @@ $(function(){
         $.ajax({
             method: "GET",
             url: this.href,
-            dataType: "json"
-        }).done(function(data){
-            console.log(data)
-        });
+            dataType: 'json',
+            success: function(data){
+            data.forEach(function(review){
+                $("div.reviews").append("<ul>" + "<li>" + review.user_username + " " + "said: " + review.content + "</li>" + "</ul>")
+            })
+        //     let html = "<%= j(render('reviews/review')) %>"
 
+        //     $("div.reviews").html(html)
+
+        }
+        });
     })
 })
-
-function getReview() {
-    $.ajax({
-        url: this.href
-    })
-}
 
 function Review (content, username, date){
     this.content = content;
@@ -26,17 +26,6 @@ function Review (content, username, date){
   }
 
 Review.prototype.showReview = function(){
-    console.log `${this.content} by ${this.user_username}`
+    console.log `${this.content} by ${this.username}`
   }
 
-    // <li>
-    //     <%= review.user.try(:username) || review.user.try(:email) %> said:
-    //     <%= review.content %><br>
-    //     <%= review.created_at %>
-        
-    //     <% if review.user == current_user || @user.try(:admin) %>
-    //         <%= form_for(review, method:"delete")do |f| %>
-    //         <%= f.submit "Delete" %>
-    //         <% end %>
-    //     <% end %>
-    // </li>
